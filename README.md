@@ -133,4 +133,4 @@ UMAP clustering confirms absence of progenitor lineages expected in marrow.
 
 Tools: Scanpy, Matplotlib, Seaborn
 
-Analysis and interpretation: Akpederi Gloria Omogwigh0
+Analysis and interpretation: Akpederi Gloria Omogwigho
