@@ -11,9 +11,12 @@ The repository includes:
 
 The computational notebook
 
+
 Full biological interpretation
 
+
 Figures generated during clustering and annotation
+
 
 Summary of findings regarding tissue identity
 
@@ -21,11 +24,15 @@ Objectives
 
 Import and preprocess the scRNA-seq dataset
 
+
 Perform UMAP-based clustering to detect major cell populations
+
 
 Annotate clusters using canonical marker genes
 
+
 Assess biological relevance and verify whether the dataset truly corresponds to bone marrow
+
 
 Provide a clear scientific explanation of identified cell types
 
@@ -35,25 +42,63 @@ Format: 10X Genomics matrix (.h5ad)
 
 Provided as a labelled “bone marrow” dataset from HackBio
 
+Single-Cell Analysis Pipeline (Scanpy + scVelo)
+1. Load Data
+Import Scanpy and load the .h5ad dataset into an AnnData object.
+2. Quality Control
+Filter out low-quality cells and lowly expressed genes.
+ Compute QC metrics such as total counts, gene counts and mitochondrial percentage.
+3. Normalisation
+Adjust counts so each cell has the same total read depth (e.g. 10,000 counts).
+4. Log Transform
+Apply log1p to stabilise expression variance and reduce the influence of extreme values.
+5. Identify Highly Variable Genes
+Select the most informative genes with high variability across cells.
+6. Scaling
+Standardise gene expression to mean 0 and variance 1.
+ Optionally regress out unwanted factors like mitochondrial percentage.
+7. PCA (Principal Component Analysis)
+Reduce dimensionality and capture the main patterns of variation.
+8. Neighbour Graph Construction
+Build a k-nearest neighbour graph using PCA components.
+9. UMAP Embedding
+Create a 2D visualisation for exploring cell populations.
+10. Clustering (Leiden or Louvain)
+Group cells into clusters based on similarity in the neighbour graph.
+11. Marker Gene Identification
+Identify genes that best distinguish each cluster.
+12. Cell Type Annotation
+Assign biological identities to clusters using known marker genes or automated annotation tools.
+
+
 Cell Types Identified
 
 The following cell populations were detected through marker-based annotation:
 
+
 Neutrophils
+
 
 Plasma cells
 
+
 Naïve B cells
+
 
 T cells (two separate clusters)
 
+
 γδ (gamma-delta) T cells
+
 
 Eosinophils
 
+
 Dendritic cells
 
+
 Platelets
+
 
 Podocytes (kidney epithelial cells – unexpected)
 
@@ -134,3 +179,5 @@ UMAP clustering confirms absence of progenitor lineages expected in marrow.
 Tools: Scanpy, Matplotlib, Seaborn
 
 Analysis and interpretation: Akpederi Gloria Omogwigho
+
+
